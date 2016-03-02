@@ -2,9 +2,14 @@ package tetris;
 
 /**
  * Class SoundClip
+ * @authors Brendan Jones, arrangements by: luisfelipesv y melytc
  *
- * @melytc
+ * Luis Felipe Salazar A00817158 Melissa Janet Treviño A00816715
  *
+ * 1/MAR/16
+ * @version 2.0
+ *
+ * The {@code SoundClip} class is responsible the use of audio files.
  */
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
@@ -16,11 +21,22 @@ import java.net.URL;
 
 public class SoundClip {
 
+    // Input stream with a specified audio format and length.
     private AudioInputStream aiSample;
+    
+    // Clip object with the audio. 
     private Clip cClip;
+    
+    // Boolean to work with loops in the audio.
     private boolean bLooping = false;
+    
+    // Intefer with the number of repeats done of the audio.
     private int iRepeat = 0;
+    
+    // String with the name of the audio file.
     private String sFilename = "";
+    
+    // Long number with the actual time of reproduction of the audio.
     private long lClipTime = 0;
 
     /**
@@ -186,6 +202,7 @@ public class SoundClip {
      */
     public void stop() {
         cClip.stop();
+        
         // Set the clip time in 0, so it starts again if needed.
         lClipTime = 0;
     }
@@ -201,7 +218,7 @@ public class SoundClip {
     }
 
     /**
-     * Method that unpauses the audio.
+     * Method that plays again the audio from where it left.
      */
     public void unpause() {
         // Play from where it left the last time.
