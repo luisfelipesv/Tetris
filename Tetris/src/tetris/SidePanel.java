@@ -23,12 +23,12 @@ public class SidePanel extends JPanel {
 	/**
 	 * The dimensions of each tile on the next piece preview.
 	 */
-	private static final int TILE_SIZE = BoardPanel.TILE_SIZE >> 1;
+	private static final int TILE_SIZE = BoardPanel.iTitleSize >> 1;
 	
 	/**
 	 * The width of the shading on each tile on the next piece preview.
 	 */
-	private static final int SHADE_WIDTH = BoardPanel.SHADE_WIDTH >> 1;
+	private static final int SHADE_WIDTH = BoardPanel.iShadeWidth >> 1;
 	
 	/**
 	 * The number of rows and columns in the preview window. Set to
@@ -103,7 +103,7 @@ public class SidePanel extends JPanel {
 	public SidePanel(Tetris tetris) {
 		this.tetris = tetris;
 		
-		setPreferredSize(new Dimension(200, BoardPanel.PANEL_HEIGHT));
+		setPreferredSize(new Dimension(200, BoardPanel.iPanelHeight));
 		setBackground(new Color(245, 245, 245));
 	}
 	
