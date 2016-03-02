@@ -8,10 +8,17 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 /**
- * The {@code Tetris} class is responsible for handling much of the game logic and
- * reading user input.
- * @author Brendan Jones
  *
+ * @authores luisfelipesv y melytc
+ * 
+ * Luis Felipe Salazar      A00817158
+ * Melissa Janet Treviño    A00816715
+ * 
+ * Tetris is a Russian tile-matching puzzle video game.
+ * The goal is to form a horizontal line with the tiles, so 
+ * 
+ * 1/MAR/16
+ * @version 1.0
  */
 public class Tetris extends JFrame {
 	
