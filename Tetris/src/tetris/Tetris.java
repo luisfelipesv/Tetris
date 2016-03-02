@@ -1,129 +1,97 @@
 package tetris;
 
+import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.Random;
-
 import javax.swing.JFrame;
 
 /**
  *
- * @authores luisfelipesv y melytc
+ * @authors luisfelipesv y melytc
  * 
  * Luis Felipe Salazar      A00817158
  * Melissa Janet Treviño    A00816715
  * 
  * Tetris is a Russian tile-matching puzzle video game.
- * The goal is to form a horizontal line with the tiles, so 
+ * The goal is to form a horizontal line with the tiles, so that line can 
+ * disappear and clear out the space of the game.
  * 
  * 1/MAR/16
  * @version 1.0
+ * 
  */
 public class Tetris extends JFrame {
 	
-	/**
-	 * The Serial Version UID.
-	 */
+	// The Serial Version UID.
 	private static final long serialVersionUID = -4722429764792514382L;
 
-	/**
-	 * The number of milliseconds per frame.
-	 */
+	// The number of milliseconds per frame.
 	private static final long FRAME_TIME = 1000L / 50L;
 	
-	/**
-	 * The number of pieces that exist.
-	 */
+	// The number of pieces that exist.
 	private static final int TYPE_COUNT = TileType.values().length;
 		
-	/**
-	 * The BoardPanel instance.
-	 */
+	// The BoardPanel instance.
 	private BoardPanel board;
 	
-	/**
-	 * The SidePanel instance.
-	 */
+	// The SidePanel instance.
 	private SidePanel side;
 	
-	/**
-	 * Whether or not the game is paused.
-	 */
+	// Boolean to know whether or not the game is paused.
 	private boolean isPaused;
 	
-	/**
-	 * Whether or not we've played a game yet. This is set to true
-	 * initially and then set to false when the game starts.
-	 */
+	// Boolean to know whether or not we've played a game yet.
 	private boolean isNewGame;
 	
-	/**
-	 * Whether or not the game is over.
-	 */
+	// Boolean to know whether or not the game is over.
 	private boolean isGameOver;
+        
+        // Boolean to know wheter or not the music is playing.
+        private boolean bMusicOn;
 	
-	/**
-	 * The current level we're on.
-	 */
+	// Integer with the current level we're on.
 	private int level;
 	
-	/**
-	 * The current score.
-	 */
+	// Integer with the current score.
 	private int score;
 	
-	/**
-	 * The random number generator. This is used to
-	 * spit out pieces randomly.
-	 */
+	// The random number generator. 
+        // This is used to spit out pieces randomly.
 	private Random random;
 	
-	/**
-	 * The clock that handles the update logic.
-	 */
+	// The clock that handles the update logic.
 	private Clock logicTimer;
 				
-	/**
-	 * The current type of tile.
-	 */
+	// The current type of tile.
 	private TileType currentType;
 	
-	/**
-	 * The next type of tile.
-	 */
+	// The next type of tile.
 	private TileType nextType;
 		
-	/**
-	 * The current column of our tile.
-	 */
+	// Integer with the current column of our tile.
 	private int currentCol;
 	
-	/**
-	 * The current row of our tile.
-	 */
+	// Integer with the current row of our tile.
 	private int currentRow;
 	
-	/**
-	 * The current rotation of our tile.
-	 */
+	// Integer with the current rotation of our tile.
 	private int currentRotation;
 		
-	/**
-	 * Ensures that a certain amount of time passes after a piece is
-	 * spawned before we can drop it.
-	 */
+	// Integer that ensures that a certain amount of time passes after 
+	// a piece is spawned before we can drop it.
 	private int dropCooldown;
 	
-	/**
-	 * The speed of the game.
-	 */
+	// Integer with the speed of the game.
 	private float gameSpeed;
+        
+        // Audioclip with the Game theme selected.
+        private SoundClip audioGame;
 		
-	/**
-	 * Creates a new Tetris instance. Sets up the window's properties,
-	 * and adds a controller listener.
-	 */
+	// Creates a new Tetris instance. Sets up the window's properties,
+	// and adds a controller listener.
 	private Tetris() {
 		/*
 		 * Set the basic properties of the window.
@@ -254,8 +222,58 @@ public class Tetris extends JFrame {
 						resetGame();
 					}
 					break;
-				
+                                        
+                                case KeyEvent.VK_1:
+                                        if(!bMusicOn){
+                                            audioGame = new SoundClip("Classic.wav");
+                                            audioGame.play();
+                                            audioGame.setLooping(true);
+                                            bMusicOn = true;
+                                        } else {
+                                            audioGame.stop();
+                                            audioGame.setFilename("Classic.wav");
+                                            audioGame.play();
+                                        }
+                                    break;
+                                    
+                                case KeyEvent.VK_2:
+                                        audioGame.stop();
+                                        audioGame = new SoundClip("Horror.wav");
+                                        audioGame.play();
+                                        audioGame.setLooping(true);
+                                        bMusicOn = true;
+                                    break;
+                                    
+                                case KeyEvent.VK_3:
+                                        audioGame = new SoundClip("Move.wav");
+                                        audioGame.play();
+                                        audioGame.setLooping(true);
+                                        bMusicOn = true;
+                                    break;
+                                    
+                                case KeyEvent.VK_4:
+                                        audioGame = new SoundClip("Pop.wav");
+                                        audioGame.play();
+                                        audioGame.setLooping(true);
+                                        bMusicOn = true;
+                                    break;
+                                    
+                                case KeyEvent.VK_5:
+                                        audioGame = new SoundClip("Relaxed.wav");
+                                        audioGame.play();
+                                        audioGame.setLooping(true);
+                                        bMusicOn = true;
+                                    break;
+                                    
+                                case KeyEvent.VK_0:
+                                    if(bMusicOn){
+                                        audioGame.stop();
+                                    } else if (!bMusicOn){
+                                        audioGame.play();
+                                    }
 				}
+                                
+                                
 			}
 			
 			@Override
@@ -291,12 +309,13 @@ public class Tetris extends JFrame {
 	 * Starts the game running. Initializes everything and enters the game loop.
 	 */
 	private void startGame() {
-		/*
-		 * Initialize our random number generator, logic timer, and new game variables.
-		 */
+		// Initialize our random number generator, logic timer, and new game variables.
+		 // This is set to true
+	// initially and then set to false when the game starts.
 		this.random = new Random();
 		this.isNewGame = true;
 		this.gameSpeed = 1.0f;
+                this.bMusicOn = false;
 		
 		/*
 		 * Setup the timer to keep the game from running before the user presses enter
@@ -415,7 +434,8 @@ public class Tetris extends JFrame {
 		this.gameSpeed = 1.0f;
 		this.nextType = TileType.values()[random.nextInt(TYPE_COUNT)];
 		this.isNewGame = false;
-		this.isGameOver = false;		
+		this.isGameOver = false;
+                this.bMusicOn = false;
 		board.clear();
 		logicTimer.reset();
 		logicTimer.setCyclesPerSecond(gameSpeed);
