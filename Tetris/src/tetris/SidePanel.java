@@ -16,107 +16,109 @@ import javax.swing.JPanel;
  *
  */
 public class SidePanel extends JPanel {
-	
-	/**
-	 * Serial Version UID.
-	 */
-	private static final long serialVersionUID = 2181495598854992747L;
 
-	/**
-	 * The dimensions of each tile on the next piece preview.
-	 */
-	private static final int TILE_SIZE = BoardPanel.iTitleSize >> 1;
-	
-	/**
-	 * The width of the shading on each tile on the next piece preview.
-	 */
-	private static final int SHADE_WIDTH = BoardPanel.iShadeWidth >> 1;
-	
-	/**
-	 * The number of rows and columns in the preview window. Set to
-	 * 5 because we can show any piece with some sort of padding.
-	 */
-	private static final int TILE_COUNT = 5;
-	
-	/**
-	 * The center x of the next piece preview box.
-	 */
-	private static final int SQUARE_CENTER_X = 130;
-	
-	/**
-	 * The center y of the next piece preview box.
-	 */
-	private static final int SQUARE_CENTER_Y = 65;
-	
-	/**
-	 * The size of the next piece preview box.
-	 */
-	private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);
-	
-	/**
-	 * The number of pixels used on a small insets (generally used for categories).
-	 */
-	private static final int SMALL_INSET = 20;
-	
-	/**
-	 * The number of pixels used on a large insets.
-	 */
-	private static final int LARGE_INSET = 40;
-	
-	/**
-	 * The y coordinate of the stats category.
-	 */
-	private static final int STATS_INSET = 135;
-	
-	/**
-	 * The y coordinate of the controls category.
-	 */
-	private static final int CONTROLS_INSET = 250;
-	
-	/**
-	 * The number of pixels to offset between each string.
-	 */
-	private static final int TEXT_STRIDE = 25;
-	
-	/**
-	 * The small font.
-	 */
-	private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 11);
-	
-	/**
-	 * The large font.
-	 */
-	private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
-	
-	/**
-	 * The color to draw the text and preview box in.
-	 */
-	private static final Color DRAW_COLOR = new Color(128, 192, 128);
-	
-	/**
-	 * The Tetris instance.
-	 */
-	private Tetris tetris;
-	
-	/**
-	 * Creates a new SidePanel and sets it's display properties.
-	 * @param tetris The Tetris instance to use.
-	 */
-	public SidePanel(Tetris tetris) {
-		this.tetris = tetris;
-		
-		setPreferredSize(new Dimension(200, BoardPanel.iPanelHeight));
-		setBackground(new Color(245, 245, 245));
-	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		//Set the color for drawing.
-		g.setColor(DRAW_COLOR);
-		
-		/*
+    /**
+     * Serial Version UID.
+     */
+    private static final long serialVersionUID = 2181495598854992747L;
+
+    /**
+     * The dimensions of each tile on the next piece preview.
+     */
+    private static final int TILE_SIZE = BoardPanel.iTitleSize >> 1;
+
+    /**
+     * The width of the shading on each tile on the next piece preview.
+     */
+    private static final int SHADE_WIDTH = BoardPanel.iShadeWidth >> 1;
+
+    /**
+     * The number of rows and columns in the preview window. Set to 5 because we
+     * can show any piece with some sort of padding.
+     */
+    private static final int TILE_COUNT = 5;
+
+    /**
+     * The center x of the next piece preview box.
+     */
+    private static final int SQUARE_CENTER_X = 130;
+
+    /**
+     * The center y of the next piece preview box.
+     */
+    private static final int SQUARE_CENTER_Y = 65;
+
+    /**
+     * The size of the next piece preview box.
+     */
+    private static final int SQUARE_SIZE = (TILE_SIZE * TILE_COUNT >> 1);
+
+    /**
+     * The number of pixels used on a small insets (generally used for
+     * categories).
+     */
+    private static final int SMALL_INSET = 20;
+
+    /**
+     * The number of pixels used on a large insets.
+     */
+    private static final int LARGE_INSET = 40;
+
+    /**
+     * The y coordinate of the stats category.
+     */
+    private static final int STATS_INSET = 135;
+
+    /**
+     * The y coordinate of the controls category.
+     */
+    private static final int CONTROLS_INSET = 250;
+
+    /**
+     * The number of pixels to offset between each string.
+     */
+    private static final int TEXT_STRIDE = 25;
+
+    /**
+     * The small font.
+     */
+    private static final Font SMALL_FONT = new Font("Tahoma", Font.BOLD, 11);
+
+    /**
+     * The large font.
+     */
+    private static final Font LARGE_FONT = new Font("Tahoma", Font.BOLD, 13);
+
+    /**
+     * The color to draw the text and preview box in.
+     */
+    private static final Color DRAW_COLOR = new Color(128, 192, 128);
+
+    /**
+     * The Tetris instance.
+     */
+    private Tetris tetris;
+
+    /**
+     * Creates a new SidePanel and sets it's display properties.
+     *
+     * @param tetris The Tetris instance to use.
+     */
+    public SidePanel(Tetris tetris) {
+        this.tetris = tetris;
+
+        setPreferredSize(new Dimension(200, BoardPanel.iPanelHeight));
+        setBackground(new Color(245, 245, 245));
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        //Set the color for drawing.
+        g.setColor(DRAW_COLOR);
+
+        /*
 		 * This variable stores the current y coordinate of the string.
 		 * This way we can re-order, add, or remove new strings if necessary
 		 * without needing to change the other strings.
