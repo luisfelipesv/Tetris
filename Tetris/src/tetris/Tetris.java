@@ -1,11 +1,11 @@
 package tetris;
 
-import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.net.URL;
 import java.util.Random;
+import java.io.RandomAccessFile;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -205,13 +205,6 @@ public class Tetris extends JFrame {
                         }
                         break;
 
-                    case KeyEvent.VK_S:
-
-                        break;
-
-                    case KeyEvent.VK_L:
-
-                        break;
                     /*
 				 * Start Game - When pressed, check to see that we're in either a game over or new
 				 * game state. If so, reset the game.
@@ -287,6 +280,20 @@ public class Tetris extends JFrame {
                     case KeyEvent.VK_DOWN:
                         logicTimer.setCyclesPerSecond(gameSpeed);
                         logicTimer.reset();
+                        break;
+
+                    case KeyEvent.VK_S:
+                        try {
+                            saveGame();
+                        } catch (IOException ex) {
+                        }
+                        break;
+
+                    case KeyEvent.VK_L:
+                        try {
+                            loadGame();
+                        } catch (IOException ex) {
+                        }
                         break;
                 }
 
@@ -609,6 +616,61 @@ public class Tetris extends JFrame {
      */
     public int getPieceRotation() {
         return currentRotation;
+    }
+
+    public void saveGame() throws IOException {
+        RandomAccessFile rafFile = new RandomAccessFile("Game.dat", "rw");
+        rafFile.writeInt(this.level);
+        rafFile.writeInt(this.score);
+        rafFile.writeInt(this.currentCol);
+        rafFile.writeInt(this.currentRow);
+        rafFile.writeInt(this.currentRotation);
+        rafFile.writeInt(currentType.getType());
+        rafFile.writeInt(nextType.getType());
+        rafFile.writeFloat(this.gameSpeed);
+        rafFile.writeBoolean(this.isGameOver);
+        rafFile.writeBoolean(this.isNewGame);
+
+        int matStatus[][] = board.getState();
+
+        rafFile.writeInt(matStatus.length);
+        rafFile.writeInt(matStatus[0].length);
+        for (int iR = 0; iR < matStatus.length; iR++) {
+            for (int iC = 0; iC < matStatus[0].length; iC++) {
+                rafFile.writeInt(matStatus[iR][iC]);
+            }
+        }
+    }
+
+    public void loadGame() throws IOException {
+
+        RandomAccessFile rafFile = new RandomAccessFile("Game.dat", "rw");
+        this.level = rafFile.readInt();
+        this.score = rafFile.readInt();
+        this.currentCol = rafFile.readInt();
+        this.currentRow = rafFile.readInt();
+        this.currentRotation = rafFile.readInt();
+        this.currentType = TileType.values()[rafFile.readInt()];
+        this.nextType = TileType.values()[rafFile.readInt()];
+        this.gameSpeed = rafFile.readFloat();
+        this.isGameOver = rafFile.readBoolean();
+        this.isNewGame = rafFile.readBoolean();
+
+        logicTimer.reset();
+        logicTimer.setCyclesPerSecond(gameSpeed);
+
+        int iI = rafFile.readInt();
+        int iJ = rafFile.readInt();
+        int matBoard[][] = new int[iI][iJ];
+
+        for (int iR = 0; iR < iI; iR++) {
+            for (int iC = 0; iC < iJ; iC++) {
+                matBoard[iR][iC] = rafFile.readInt();
+            }
+        }
+
+        board.clear();
+        board.setState(matBoard);
     }
 
     /**
