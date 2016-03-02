@@ -412,26 +412,41 @@ public class BoardPanel extends JPanel {
 		/*
 		 * Fill the entire tile with the base color.
 		 */
-		g.setColor(base);
+		g.setColor(light);
 		g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+                g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 		
 		/*
 		 * Fill the bottom and right edges of the tile with the dark shading color.
 		 */
-		g.setColor(dark);
-		g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
-		g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
+		g.setColor(base);
+		//g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
+		//g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
+                int xPoints[] = {x, x, x + (TILE_SIZE / 2)};
+                int yPoints[] = {y + TILE_SIZE, y, y + (TILE_SIZE / 2)};
+                int xPoints2[] = {x + (TILE_SIZE / 2), x + TILE_SIZE, x + TILE_SIZE};
+                int yPoints2[] = {y + (TILE_SIZE / 2), y + TILE_SIZE, y};
+                g.fillPolygon(xPoints, yPoints, 3);
+                g.fillPolygon(xPoints2, yPoints2, 3);
+                
+                
+                g.setColor(dark);
+                int xPoints3[] = {x, x + TILE_SIZE, x + (TILE_SIZE / 2)};
+                int yPoints3[] = {y + TILE_SIZE, y + TILE_SIZE, y + (TILE_SIZE / 2) };
+                g.fillPolygon(xPoints3, yPoints3, 3);
 		
 		/*
 		 * Fill the top and left edges with the light shading. We draw a single line
 		 * for each row or column rather than a rectangle so that we can draw a nice
 		 * looking diagonal where the light and dark shading meet.
 		 */
+                /*
 		g.setColor(light);
 		for(int i = 0; i < SHADE_WIDTH; i++) {
 			g.drawLine(x, y + i, x + TILE_SIZE - i - 1, y + i);
 			g.drawLine(x + i, y, x + i, y + TILE_SIZE - i - 1);
 		}
+                */
 	}
 
 }

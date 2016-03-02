@@ -251,7 +251,7 @@ public enum TileType {
 	private TileType(Color color, int dimension, int cols, int rows, boolean[][] tiles) {
 		this.baseColor = color;
 		this.lightColor = color.brighter();
-		this.darkColor = color.darker();
+		this.darkColor = color.darker();        
 		this.dimension = dimension;
 		this.tiles = tiles;
 		this.cols = cols;
