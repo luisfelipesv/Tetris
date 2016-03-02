@@ -116,7 +116,7 @@ public class BoardPanel extends JPanel {
 		this.tiles = new TileType[ROW_COUNT][COL_COUNT];
 		
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 	}
 	
 	/**
@@ -288,12 +288,12 @@ public class BoardPanel extends JPanel {
 		 */
 		if(tetris.isPaused()) {
 			g.setFont(LARGE_FONT);
-			g.setColor(Color.WHITE);
+			g.setColor(Color.DARK_GRAY);
 			String msg = "PAUSED";
 			g.drawString(msg, CENTER_X - g.getFontMetrics().stringWidth(msg) / 2, CENTER_Y);
 		} else if(tetris.isNewGame() || tetris.isGameOver()) {
 			g.setFont(LARGE_FONT);
-			g.setColor(Color.WHITE);
+			g.setColor(Color.DARK_GRAY);
 			
 			/*
 			 * Because both the game over and new game screens are nearly identical,
@@ -345,7 +345,7 @@ public class BoardPanel extends JPanel {
 			 * down until we hit a row that would cause a collision.
 			 */
 			Color base = type.getBaseColor();
-			base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 20);
+			base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 40);
 			for(int lowest = pieceRow; lowest < ROW_COUNT; lowest++) {
 				//If no collision is detected, try the next row.
 				if(isValidAndEmpty(type, pieceCol, lowest, rotation)) {					
@@ -371,7 +371,7 @@ public class BoardPanel extends JPanel {
 			 * Draw the background grid above the pieces (serves as a useful visual
 			 * for players, and makes the pieces look nicer by breaking them up.
 			 */
-			g.setColor(Color.DARK_GRAY);
+			g.setColor(Color.LIGHT_GRAY);
 			for(int x = 0; x < COL_COUNT; x++) {
 				for(int y = 0; y < VISIBLE_ROW_COUNT; y++) {
 					g.drawLine(0, y * TILE_SIZE, COL_COUNT * TILE_SIZE, y * TILE_SIZE);
@@ -383,7 +383,7 @@ public class BoardPanel extends JPanel {
 		/*
 		 * Draw the outline.
 		 */
-		g.setColor(Color.WHITE);
+		g.setColor(Color.DARK_GRAY);
 		g.drawRect(0, 0, TILE_SIZE * COL_COUNT, TILE_SIZE * VISIBLE_ROW_COUNT);
 	}
 	
