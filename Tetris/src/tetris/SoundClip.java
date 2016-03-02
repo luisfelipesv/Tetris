@@ -20,6 +20,7 @@ public class SoundClip {
 	private boolean looping = false;
 	private int repeat = 0;
 	private String filename = "";
+        private long clipTime = 0;
 
 	/**
 	 * Constructor default
@@ -166,5 +167,21 @@ public class SoundClip {
 	 */
 	public void stop() {
 		clip.stop();
+                clipTime = 0;
 	}
+        
+        public void pause() {
+            clipTime= clip.getMicrosecondPosition();
+            clip.stop();
+
+        }
+        
+        public void unpause() {
+            clip.setMicrosecondPosition(clipTime);
+            //Reproduce el sonido con repeticion opcional.
+		if (looping)
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		else
+			clip.loop(repeat);
+        }
 }
