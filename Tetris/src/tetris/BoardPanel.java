@@ -75,11 +75,13 @@ public class BoardPanel extends JPanel {
     // The TTtiles that make up the board.
     private TileType[][] TTtiles;
 
-    // Int to manage animation
+    // Int to manage animation.
     private int iAnim;
     private int iCont;
 
     /**
+     * BoardPanel
+     * 
      * Method that creates a new GameBoard instance.
      *
      * @param tetris is the <code>Tetris</code> instance to use.
@@ -95,7 +97,9 @@ public class BoardPanel extends JPanel {
     }
 
     /**
-     * Method that resets the board and clears away any TTtiles.
+     * clear
+     * 
+     * Method that resets the board and clears away any tiles.
      */
     public void clear() {
         /*
@@ -110,6 +114,8 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * isValidAndEmpty
+     * 
      * Method that determines whether or not a piece can be placed at the
      * coordinates.
      *
@@ -130,7 +136,6 @@ public class BoardPanel extends JPanel {
                 - ttType.getRightInset(iRotation) >= iColumns) {
             return false;
         }
-
         // Ensure the piece is in a valid row.
         if (iY < -ttType.getTopInset(iRotation) || iY + ttType.getDimension()
                 - ttType.getBottomInset(iRotation) >= iRows) {
@@ -151,8 +156,11 @@ public class BoardPanel extends JPanel {
     }
 
     /**
-     * Method that adds a piece to the game board. Note: Doesn't check for
-     * existing pieces, and will overwrite them if they exist.
+     * addPiece
+     * 
+     * Method that adds a piece to the game board. 
+     * Note: Doesn't check for existing pieces, 
+     * and will overwrite them if they exist.
      *
      * @param ttType is the <code>TileType</code> of the piece to use.
      * @param iX is the <code>integer</code> with the x coordinate of the piece.
@@ -162,10 +170,10 @@ public class BoardPanel extends JPanel {
      */
     public void addPiece(TileType ttType, int iX, int iY, int iRotation) {
         /*
-		 * Loop through every tile within the piece and add it
-		 * to the board only if the boolean that represents that
-		 * tile is set to true.
-         */
+        * Loop through every tile within the piece and add it
+        * to the board only if the boolean that represents that
+        * tile is set to true.
+        */
         for (int iCol = 0; iCol < ttType.getDimension(); iCol++) {
             for (int iRow = 0; iRow < ttType.getDimension(); iRow++) {
                 if (ttType.isTile(iCol, iRow, iRotation)) {
@@ -176,6 +184,8 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * checkLines
+     * 
      * Method that checks the board to see if any lines have been cleared, and
      * removes them from the game.
      *
@@ -202,6 +212,7 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * checkLine
      * Method that checks whether or not {@code row} is full.
      *
      * @param iLine is an <code>integer</code> with the row to check.
@@ -211,7 +222,7 @@ public class BoardPanel extends JPanel {
         /*
         * Iterate through every column in this row. If any of them are
         * empty, then the row is not full.
-         */
+        */
         for (int iCol = 0; iCol < iColumns; iCol++) {
             if (!isOccupied(iCol, iLine)) {
                 return false;
@@ -231,6 +242,8 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * isOccupied
+     * 
      * Method that checks to see if the tile is already occupied.
      *
      * @param iX is the <code>integer</code> with the x coordinate to check.
@@ -243,17 +256,21 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * setTile
+     * 
      * Method that sets a tile located at the desired column and row.
      *
      * @param iX is the <code>integer</code> with the column.
      * @param iY is the <code>integer</code> with the row.
-     * @param type The value to set to the tile to.
+     * @param ttType is the <code>TileType</code> of the piece to set.
      */
-    private void setTile(int iX, int iY, TileType type) {
-        TTtiles[iY][iX] = type;
+    private void setTile(int iX, int iY, TileType TTtype) {
+        TTtiles[iY][iX] = TTtype;
     }
 
     /**
+     * getTile
+     * 
      * Method that gets a tile by it's column and row.
      *
      * @param iX is the <code>integer</code> with the column.
@@ -264,6 +281,13 @@ public class BoardPanel extends JPanel {
         return TTtiles[y][x];
     }
 
+    /**
+     * paintComponent
+     * 
+     * Method that paints the board depending on the current game state.
+     * 
+     * @param graGraphic is a <code>Graphic object</code>.
+     */
     @Override
     public void paintComponent(Graphics graGraphic) {
         super.paintComponent(graGraphic);
@@ -287,6 +311,8 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * drawPauseInterface
+     * 
      * Method that paints the interface when the game is paused.
      *
      * @param graGraphic is the <code>Graphic</code> of the game.
@@ -295,8 +321,8 @@ public class BoardPanel extends JPanel {
         graGraphic.setFont(fLargeFont);
         graGraphic.setColor(Color.DARK_GRAY);
         String msg = "PAUSED";
-        graGraphic.drawString(msg, iCenterX
-                - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY / 2);
+        graGraphic.drawString(msg, iCenterX- graGraphic.getFontMetrics()
+                .stringWidth(msg) / 2, iCenterY / 2);
         
         graGraphic.setFont(fSmallFont);
         String msg0 = "Press a number to switch the song";
@@ -313,28 +339,28 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * drawNewGame
+     * 
      * Method that paints the interface for a new game.
-     *
+     * Because both the game over and new game screens are nearly 
+     * identical, we can handle them together and just use a ternary 
+     * operator to change the messages that are displayed.
+     * 
      * @param graGraphic is the <code>Graphic</code> of the game.
      */
     public void drawNewGame(Graphics graGraphic) {
         graGraphic.setFont(fLargeFont);
         graGraphic.setColor(Color.DARK_GRAY);
 
-        /*
-        * Because both the game over and new game screens are nearly 
-        * identical, we can handle them together and just use a ternary 
-        * operator to change the messages that are displayed.
-         */
         String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
         graGraphic.drawString(msg, iCenterX
                 - graGraphic.getFontMetrics().stringWidth(msg) / 2, 100);
+        
         graGraphic.setFont(fSmallFont);
         msg = "Press Enter to Play" + (tetris.isNewGame() ? "" : " Again");
         graGraphic.drawString(msg, iCenterX
                 - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY);
         
-                graGraphic.setFont(fSmallFont);
         String msg0 = "Press a numbert to switch the song";
         graGraphic.drawString(msg0, iCenterX
                 - graGraphic.getFontMetrics().stringWidth(msg0) / 2,320 );
@@ -348,6 +374,8 @@ public class BoardPanel extends JPanel {
     }
 
     /**
+     * drawBoard
+     * 
      * Method that paints the board when playing.
      *
      * @param graGraphic is the <code>Graphic</code> of the game.
@@ -355,25 +383,19 @@ public class BoardPanel extends JPanel {
     public void drawBoard(Graphics graGraphic) {
         // Draw the titles onto the board.
         drawTiles(graGraphic);
-
+        
+        // Controls the animations.
         if (iAnim < 25) {
             iAnim++;
         } else {
             iAnim = 0;
         }
 
-        /*
-        * Draw the current piece. This cannot be drawn like the rest of the
-        * pieces because it's still not part of the game board. If it were
-        * part of the board, it would need to be removed every frame which
-        * would just be slow and confusing.
-         */
+        // Draw the current piece. 
         drawCurrentTile(graGraphic);
 
-        /*
-        * Draw the background grid above the pieces (serves as a useful visual
-        * for players, and makes the pieces look nicer by breaking them up.
-         */
+        // Draw the background grid above the pieces (serves as a useful visual
+        // for players, and makes the pieces look nicer by breaking them up.
         graGraphic.setColor(Color.LIGHT_GRAY);
         for (int x = 0; x < iColumns; x++) {
             for (int y = 0; y < iRowsVisible; y++) {
@@ -383,6 +405,13 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * drawTiles
+     * 
+     * Method that paints the tiles.
+     *
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     */
     public void drawTiles(Graphics graGraphic) {
         for (int x = 0; x < iColumns; x++) {
             for (int y = iRowsHidden; y < iRows; y++) {
@@ -395,6 +424,13 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * drawCurrentTile
+     * 
+     * Method that paints the current tile falling.
+     *
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     */
     public void drawCurrentTile(Graphics graGraphic) {
         TileType type = tetris.getPieceType();
         int pieceCol = tetris.getPieceCol();
@@ -421,25 +457,37 @@ public class BoardPanel extends JPanel {
         drawGhost(graGraphic, type, pieceCol, pieceRow, rotation);
     }
 
-    public void drawGhost(Graphics graGraphic, TileType type, int pieceCol,
-            int pieceRow, int rotation) {
-        Color base = type.getBaseColor();
+    /**
+     * drawGhost
+     * 
+     * Method that paints the current tile falling ghost or shadow.
+     *
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     * @param TTtype is the <code>TileType</code> of the piece to draw.
+     * @param iPieceCol is the <code>integer</code> with the actual column
+     * of the tile.
+     * @param iPieceRow is the <code>integer</code> with the actual row
+     * of the tile.
+     * @param iRotation is the <code>integer</code> with the rotation value.
+     */
+    public void drawGhost(Graphics graGraphic, TileType TTtype, int iPieceCol,
+            int iPieceRow, int iRotation) {
+        Color base = TTtype.getBaseColor();
         base = new Color(base.getRed(), base.getGreen(), base.getBlue(), 40);
-        for (int lowest = pieceRow; lowest < iRows; lowest++) {
+        for (int lowest = iPieceRow; lowest < iRows; lowest++) {
             // If no collision is detected, try the next row.
-            if (isValidAndEmpty(type, pieceCol, lowest, rotation)) {
+            if (isValidAndEmpty(TTtype, iPieceCol, lowest, iRotation))
                 continue;
-            }
 
-            // Draw the ghost one row higher than the one the collision took place at.
+            // Draw the ghost one row higher than the row of collision.
             lowest--;
 
             // Draw the ghost piece.
-            for (int col = 0; col < type.getDimension(); col++) {
-                for (int row = 0; row < type.getDimension(); row++) {
-                    if (lowest + row >= 2 && type.isTile(col, row, rotation)) {
+            for (int col = 0; col < TTtype.getDimension(); col++) {
+                for (int row = 0; row < TTtype.getDimension(); row++) {
+                    if (lowest + row >= 2 && TTtype.isTile(col, row, iRotation)) {
                         drawTile(base, base.brighter(), base.darker(),
-                                (pieceCol + col) * iTileSize,
+                                (iPieceCol + col) * iTileSize,
                                 (lowest + row - iRowsHidden) * iTileSize,
                                 graGraphic);
                     }
@@ -450,139 +498,221 @@ public class BoardPanel extends JPanel {
     }
 
     /**
-     * Draws a tile onto the board.
+     * drawTile
+     * 
+     * Method that draws a tile onto the board.
      *
-     * @param type The type of tile to draw.
-     * @param x The column.
-     * @param y The row.
-     * @param g The graphics object.
+     * @param ttType is the <code>TileType</code> of the piece to draw.
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    private void drawTile(TileType type, int x, int y, Graphics g) {
-        drawTile(type.getBaseColor(), type.getLightColor(), type.getDarkColor(), x, y, g);
+    private void drawTile(TileType TTtype, int iX, int iY, Graphics graGraphic) {
+        drawTile(TTtype.getBaseColor(), TTtype.getLightColor(), 
+                TTtype.getDarkColor(), iX, iY, graGraphic);
     }
     
     /**
-     * Draws a current tile onto the board.
+     * drawCurrentTile
+     * 
+     * Method that draws the current tile onto the board.
      *
-     * @param type The type of tile to draw.
-     * @param x The column.
-     * @param y The row.
-     * @param g The graphics object.
+     * @param ttType is the <code>TileType</code> of the piece to draw.
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    private void drawCurrentTile(TileType type, int x, int y, Graphics g) {
-        drawCurrentTile(type.getBaseColor(), type.getLightColor(), type.getDarkColor(), x, y, g);
+    private void drawCurrentTile(TileType ttType, int iX, int iY, 
+            Graphics graGraphic) {
+        drawCurrentTile(ttType.getBaseColor(), ttType.getLightColor(), 
+                ttType.getDarkColor(), iX, iY, graGraphic);
     }
 
     /**
-     * Draws a current tile onto the board.
+     * drawCurrentTile
+     * 
+     * Method that draws the current tile onto the board with the definition
+     * of colors and shadows.
      *
-     * @param base The base color of tile.
-     * @param light The light color of the tile.
-     * @param dark The dark color of the tile.
-     * @param x The column.
-     * @param y The row.
-     * @param g The graphics object.
+     * @param cBase is the <code>base color</code> of tile.
+     * @param cLight is the <code>light color</code> of the tile.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    private void drawCurrentTile(Color base, Color light, Color dark, int x, int y, Graphics g) {
+    private void drawCurrentTile(Color cBase, Color cLight, Color cDark, 
+            int iX, int iY, Graphics graGraphic) {
 
         // Fill the entire tile with the base color.
-        g.setColor(light);
-        g.fillRect(x, y, iTileSize, iTileSize);
-        g.fillRect(x, y, iTileSize, iTileSize);
+        graGraphic.setColor(cLight);
+        graGraphic.fillRect(iX, iY, iTileSize, iTileSize);
+        graGraphic.fillRect(iX, iY, iTileSize, iTileSize);
 
         // Fill the triangles inside the tile
-        g.setColor(base);
+        graGraphic.setColor(cBase);
         if (iAnim == 0) {
-            int xPoints[] = {x, x, x + (iTileSize / 2)};
-            int yPoints[] = {y + iTileSize, y, y + (iTileSize / 2)};
-            int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
-            int yPoints2[] = {y + (iTileSize / 2), y + iTileSize, y};
-            g.fillPolygon(xPoints, yPoints, 3);
-            g.fillPolygon(xPoints2, yPoints2, 3);
-            g.setColor(dark);
-            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
-            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2)};
-            g.fillPolygon(xPoints3, yPoints3, 3);
+            drawTile0(iX, iY, cDark, graGraphic);
+            
         } else if (iAnim == 13) {
-            int xPoints[] = {x, x, x + (iTileSize / 2)};
-            int yPoints[] = {y + iTileSize, y, y};
-            int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
-            int yPoints2[] = {y, y + iTileSize, y};
-            g.fillPolygon(xPoints, yPoints, 3);
-            g.fillPolygon(xPoints2, yPoints2, 3);
-            g.setColor(dark);
-            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
-            int yPoints3[] = {y + iTileSize, y + iTileSize, y};
-            g.fillPolygon(xPoints3, yPoints3, 3);
+            drawTile13(iX, iY, cDark, graGraphic);
+            
         } else if (iAnim < 13) {
-            int xPoints[] = {x, x, x + (iTileSize / 2), x + iAnim};
-            int yPoints[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnim, y};
-            int xPoints2[] = {x + iTileSize, x + iTileSize, x + (iTileSize / 2), x + iTileSize - iAnim};
-            int yPoints2[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnim, y};
-            g.fillPolygon(xPoints, yPoints, 4);
-            g.fillPolygon(xPoints2, yPoints2, 4);
-            g.setColor(dark);
-            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
-            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2) - iAnim};
-            g.fillPolygon(xPoints3, yPoints3, 3);
+            drawTile13minus(iX, iY, cDark, graGraphic);
+            
         } else {
-            int iAnm = 26 - iAnim; // Variable para Animación
-            int xPoints[] = {x, x, x + (iTileSize / 2), x + iAnm};
-            int yPoints[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnm, y};
-            int xPoints2[] = {x + iTileSize, x + iTileSize, x + (iTileSize / 2), x + iTileSize - iAnm};
-            int yPoints2[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnm, y};
-            g.fillPolygon(xPoints, yPoints, 4);
-            g.fillPolygon(xPoints2, yPoints2, 4);
-            g.setColor(dark);
-            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
-            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2) - iAnm};
-            g.fillPolygon(xPoints3, yPoints3, 3);
+            drawTile13plus(iX, iY, cDark, graGraphic);
         }
+    }
+    /**
+     * drawTile0
+     * 
+     * Method that draws the first case of the method drawing the current tile.
+     * 
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     */
+    public void drawTile0(int iX, int iY, Color cDark, Graphics graGraphic) {
+        int xPoints[] = {iX, iX, iX + (iTileSize / 2)};
+            int yPoints[] = {iY + iTileSize, iY, iY + (iTileSize / 2)};
+            int xPoints2[] = {iX + (iTileSize / 2), iX + iTileSize, iX + 
+                    iTileSize};
+            int yPoints2[] = {iY + (iTileSize / 2), iY + iTileSize, iY};
+            graGraphic.fillPolygon(xPoints, yPoints, 3);
+            graGraphic.fillPolygon(xPoints2, yPoints2, 3);
+            graGraphic.setColor(cDark);
+            int xPoints3[] = {iX, iX + iTileSize, iX + (iTileSize / 2)};
+            int yPoints3[] = {iY + iTileSize, iY + iTileSize, iY + 
+                    (iTileSize / 2)};
+            graGraphic.fillPolygon(xPoints3, yPoints3, 3);
+    }
+
+    /**
+     * drawTile13
+     * 
+     * Method that draws the second case of the method drawing the current tile.
+     * 
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param graGraphic is the <code>Graphic</code> of the game. 
+     */
+    public void drawTile13(int iX, int iY, Color cDark, Graphics graGraphic) {
+        int xPoints[] = {iX, iX, iX + (iTileSize / 2)};
+            int yPoints[] = {iY + iTileSize, iY, iY};
+            int xPoints2[] = {iX + (iTileSize / 2), iX + iTileSize, 
+                iX + iTileSize};
+            int yPoints2[] = {iY, iY + iTileSize, iY};
+            graGraphic.fillPolygon(xPoints, yPoints, 3);
+            graGraphic.fillPolygon(xPoints2, yPoints2, 3);
+            graGraphic.setColor(cDark);
+            int xPoints3[] = {iX, iX + iTileSize, iX + (iTileSize / 2)};
+            int yPoints3[] = {iY + iTileSize, iY + iTileSize, iY};
+            graGraphic.fillPolygon(xPoints3, yPoints3, 3);
+    }
+    
+    /**
+     * drawTile13minus
+     * 
+     * Method that draws the third case of the method drawing the current tile.
+     * 
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     */
+    public void drawTile13minus(int iX, int iY, Color cDark, Graphics graGraphic){
+    int xPoints[] = {iX, iX, iX + (iTileSize / 2), iX + iAnim};
+            int yPoints[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnim, iY};
+            int xPoints2[] = {iX + iTileSize, iX + iTileSize, iX + (iTileSize / 2), iX + iTileSize - iAnim};
+            int yPoints2[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnim, iY};
+            graGraphic.fillPolygon(xPoints, yPoints, 4);
+            graGraphic.fillPolygon(xPoints2, yPoints2, 4);
+            graGraphic.setColor(cDark);
+            int xPoints3[] = {iX, iX + iTileSize, iX + (iTileSize / 2)};
+            int yPoints3[] = {iY + iTileSize, iY + iTileSize, iY + (iTileSize / 2) - iAnim};
+            graGraphic.fillPolygon(xPoints3, yPoints3, 3);
+}
+    
+    /**
+     * drawTile13plus
+     * 
+     * Method that draws the fourth case of the method drawing the current tile.
+     * 
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param graGraphic is the <code>Graphic</code> of the game.
+     */
+    public void drawTile13plus(int iX, int iY, Color cDark, Graphics graGraphic) {
+        int iAnm = 26 - iAnim; // Variable para Animación
+            int xPoints[] = {iX, iX, iX + (iTileSize / 2), iX + iAnm};
+            int yPoints[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnm, iY};
+            int xPoints2[] = {iX + iTileSize, iX + iTileSize, iX + (iTileSize / 2), iX + iTileSize - iAnm};
+            int yPoints2[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnm, iY};
+            graGraphic.fillPolygon(xPoints, yPoints, 4);
+            graGraphic.fillPolygon(xPoints2, yPoints2, 4);
+            graGraphic.setColor(cDark);
+            int xPoints3[] = {iX, iX + iTileSize, iX + (iTileSize / 2)};
+            int yPoints3[] = {iY + iTileSize, iY + iTileSize, iY + (iTileSize / 2) - iAnm};
+            graGraphic.fillPolygon(xPoints3, yPoints3, 3);
+    }
+    
+    
+    /**
+     * drawTile
+     * 
+     * Method that draws a shadow tile onto the board.
+     *
+     * @param cBase is the <code>base color</code> of tile.
+     * @param cLight is the <code>light color</code> of the tile.
+     * @param cDark is the <code>dark color</code> of the tile.
+     * @param iX is the <code>integer</code> with the column.
+     * @param iY is the <code>integer</code> with the row.
+     * @param graGraphic is the <code>Graphic</code> of the game
+     */
+    private void drawTile(Color cBase, Color cLight, Color cDark, 
+            int iX, int iY, Graphics graGraphic) {
+
+        // Fill the entire tile with the base color.
+        graGraphic.setColor(cLight);
+        graGraphic.fillRect(iX, iY, iTileSize, iTileSize);
+        graGraphic.fillRect(iX, iY, iTileSize, iTileSize);
+
+        // Fill the triangles inside the tile
+        graGraphic.setColor(cBase);
+
+        int xPoints[] = {iX, iX, iX + (iTileSize / 2)};
+        int yPoints[] = {iY + iTileSize, iY, iY + (iTileSize / 2)};
+        int xPoints2[] = {iX + (iTileSize / 2), iX + iTileSize, iX + iTileSize};
+        int yPoints2[] = {iY + (iTileSize / 2), iY + iTileSize, iY};
+        graGraphic.fillPolygon(xPoints, yPoints, 3);
+        graGraphic.fillPolygon(xPoints2, yPoints2, 3);
+        graGraphic.setColor(cDark);
+        int xPoints3[] = {iX, iX + iTileSize, iX + (iTileSize / 2)};
+        int yPoints3[] = {iY + iTileSize, iY + iTileSize, iY + (iTileSize / 2)};
+        graGraphic.fillPolygon(xPoints3, yPoints3, 3);
 
     }
 
     /**
-     * Draws a shadow tile onto the board.
-     *
-     * @param base The base color of tile.
-     * @param light The light color of the tile.
-     * @param dark The dark color of the tile.
-     * @param x The column.
-     * @param y The row.
-     * @param g The graphics object.
+     * setState
+     * 
+     * Method that modifies the state of the tile.
+     * 
+     * @param iState is an <code>integer matrix</code>.
      */
-    private void drawTile(Color base, Color light, Color dark, int x, int y, Graphics g) {
+    public void setState(int[][] iState) {
 
-        // Fill the entire tile with the base color.
-        g.setColor(light);
-        g.fillRect(x, y, iTileSize, iTileSize);
-        g.fillRect(x, y, iTileSize, iTileSize);
+        TTtiles = new TileType[iState.length][iState[0].length];
 
-        // Fill the triangles inside the tile
-        g.setColor(base);
+        for (int iC = 0; iC < iState.length; iC++) {
+            for (int iJ = 0; iJ < iState[0].length; iJ++) {
 
-        int xPoints[] = {x, x, x + (iTileSize / 2)};
-        int yPoints[] = {y + iTileSize, y, y + (iTileSize / 2)};
-        int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
-        int yPoints2[] = {y + (iTileSize / 2), y + iTileSize, y};
-        g.fillPolygon(xPoints, yPoints, 3);
-        g.fillPolygon(xPoints2, yPoints2, 3);
-        g.setColor(dark);
-        int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
-        int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2)};
-        g.fillPolygon(xPoints3, yPoints3, 3);
-
-    }
-
-    public void setState(int[][] State) {
-
-        TTtiles = new TileType[State.length][State[0].length];
-
-        for (int iC = 0; iC < State.length; iC++) {
-            for (int iJ = 0; iJ < State[0].length; iJ++) {
-
-                if (State[iC][iJ] != -1) {
-                    TTtiles[iC][iJ] = TileType.values()[State[iC][iJ]];
+                if (iState[iC][iJ] != -1) {
+                    TTtiles[iC][iJ] = TileType.values()[iState[iC][iJ]];
                 } else {
                     TTtiles[iC][iJ] = null;
                 }
@@ -590,19 +720,26 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    /**
+     * getState
+     * 
+     * Method that access the state of the tile.
+     * 
+     * @return iState is an <code>integer matrix</code>.
+     */
     public int[][] getState() {
-        int State[][] = new int[TTtiles.length][TTtiles[0].length];
+        int iState[][] = new int[TTtiles.length][TTtiles[0].length];
 
         for (int iI = 0; iI < TTtiles.length; iI++) {
             for (int iJ = 0; iJ < TTtiles[0].length; iJ++) {
 
                 if (TTtiles[iI][iJ] != null) {
-                    State[iI][iJ] = TTtiles[iI][iJ].getType();
+                    iState[iI][iJ] = TTtiles[iI][iJ].getType();
                 } else {
-                    State[iI][iJ] = -1;
+                    iState[iI][iJ] = -1;
                 }
             }
         }
-        return State;
+        return iState;
     }
 }
