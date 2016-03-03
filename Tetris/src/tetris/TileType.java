@@ -12,8 +12,7 @@ public enum TileType {
 	/**
 	 * Piece TypeI.
 	 */
-	TypeI(new Color(18, 220, 
-                220), 4, 4, 1, new boolean[][] {
+	TypeI(new Color(18, 220, 220), 4, 4, 1, new boolean[][] {
 		{
 			false,	false,	false,	false,
 			true,	true,	true,	true,
