@@ -107,19 +107,19 @@ public class Tetris extends JFrame {
         setResizable(false);
 
         /*
-		 * Initialize the BoardPanel and SidePanel instances.
+        * Initialize the BoardPanel and SidePanel instances.
          */
         this.board = new BoardPanel(this);
         this.side = new SidePanel(this);
 
         /*
-		 * Add the BoardPanel and SidePanel instances to the window.
+        * Add the BoardPanel and SidePanel instances to the window.
          */
         add(board, BorderLayout.CENTER);
         add(side, BorderLayout.EAST);
 
         /*
-		 * Adds a custom anonymous KeyListener to the frame.
+        * Adds a custom anonymous KeyListener to the frame.
          */
         addKeyListener(new KeyAdapter() {
 
@@ -129,9 +129,9 @@ public class Tetris extends JFrame {
                 switch (e.getKeyCode()) {
 
                     /*
-				 * Drop - When pressed, we check to see that the game is not
-				 * paused and that there is no drop cooldown, then set the
-				 * logic timer to run at a speed of 25 cycles per second.
+                    * Drop - When pressed, we check to see that the game is not
+                    * paused and that there is no drop cooldown, then set the
+                    * logic timer to run at a speed of 25 cycles per second.
                      */
                     case KeyEvent.VK_DOWN:
                         if (!bPaused && dropCooldown == 0) {

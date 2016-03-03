@@ -126,15 +126,17 @@ public class SidePanel extends JPanel {
         graGraphic.setFont(fLargeFont);
         graGraphic.drawString("Controls", iSmallInset, iOffset = iControlsInset);
         graGraphic.setFont(fSmallFont);
-        graGraphic.drawString("<  Move Left", iLargeInset, 
+        graGraphic.drawString("←  Move Left", iLargeInset, 
                 iOffset += iTextStride);
-        graGraphic.drawString(">  Move Right", iLargeInset, 
+        graGraphic.drawString("→  Move Right", iLargeInset, 
                 iOffset += iTextStride);
         graGraphic.drawString("Z  Rotate Anticlockwise", iLargeInset, 
                 iOffset += iTextStride);
         graGraphic.drawString("X  Rotate Clockwise", iLargeInset, 
                 iOffset += iTextStride);
-        graGraphic.drawString("v  Total Drop", iLargeInset, 
+        graGraphic.drawString("↑  Rotate Clockwise", iLargeInset, 
+                iOffset += iTextStride);
+        graGraphic.drawString("—  Total Drop (Space Bar)", iLargeInset, 
                 iOffset += iTextStride);
         graGraphic.drawString("P  Pause Game", iLargeInset, 
                 iOffset += iTextStride);
