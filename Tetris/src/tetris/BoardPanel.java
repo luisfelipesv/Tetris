@@ -19,7 +19,6 @@ import javax.swing.JPanel;
  *
  * The {@code BoardPanel} class is responsible for displaying the game grid and
  * handling things related to the game board.
-<<<<<<< HEAD
  */
 public class BoardPanel extends JPanel {
 
@@ -437,31 +436,25 @@ public class BoardPanel extends JPanel {
      */
     private void drawTile(Color base, Color light, Color dark, int x, int y, Graphics g) {
 
-        /*
-		 * Fill the entire tile with the base color.
-		 */
-		g.setColor(light);
-		g.fillRect(x, y, iTitleSize, iTitleSize);
-                g.fillRect(x, y, iTitleSize, iTitleSize);
-		
-		/*
-		 * Fill the bottom and right edges of the tile with the dark shading color.
-		 */
-		g.setColor(base);
-		//g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
-		//g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
-                int xPoints[] = {x, x, x + (iTitleSize / 2)};
-                int yPoints[] = {y + iTitleSize, y, y + (iTitleSize / 2)};
-                int xPoints2[] = {x + (iTitleSize / 2), x + iTitleSize, x + iTitleSize};
-                int yPoints2[] = {y + (iTitleSize / 2), y + iTitleSize, y};
-                g.fillPolygon(xPoints, yPoints, 3);
-                g.fillPolygon(xPoints2, yPoints2, 3);
-                
-                
-                g.setColor(dark);
-                int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-                int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2) };
-                g.fillPolygon(xPoints3, yPoints3, 3);
+        // Fill the entire tile with the base color.
+       g.setColor(light);
+       g.fillRect(x, y, iTitleSize, iTitleSize);
+       g.fillRect(x, y, iTitleSize, iTitleSize);
+
+       // Fill the bottom and right edges of the tile with the dark shading color.
+       g.setColor(base);
+       //g.fillRect(x, y + TILE_SIZE - SHADE_WIDTH, TILE_SIZE, SHADE_WIDTH);
+       //g.fillRect(x + TILE_SIZE - SHADE_WIDTH, y, SHADE_WIDTH, TILE_SIZE);
+       int xPoints[] = {x, x, x + (iTitleSize / 2)};
+       int yPoints[] = {y + iTitleSize, y, y + (iTitleSize / 2)};
+       int xPoints2[] = {x + (iTitleSize / 2), x + iTitleSize, x + iTitleSize};
+       int yPoints2[] = {y + (iTitleSize / 2), y + iTitleSize, y};
+       g.fillPolygon(xPoints, yPoints, 3);
+       g.fillPolygon(xPoints2, yPoints2, 3);
+       g.setColor(dark);
+       int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
+       int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2) };
+       g.fillPolygon(xPoints3, yPoints3, 3);
 		
 		
 }
@@ -497,5 +490,4 @@ public class BoardPanel extends JPanel {
         }
         return State;
     }
-
 }

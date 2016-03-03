@@ -192,11 +192,11 @@ public class Tetris extends JFrame {
                         break;
 
                     /*
-				 * Pause Game - When pressed, check to see that we're currently playing a game.
-				 * If so, toggle the pause variable and update the logic timer to reflect this
-				 * change, otherwise the game will execute a huge number of updates and essentially
-				 * cause an instant game over when we unpause if we stay paused for more than a
-				 * minute or so.
+                    * Pause Game - When pressed, check to see that we're currently playing a game.
+                    * If so, toggle the pause variable and update the logic timer to reflect this
+                    * change, otherwise the game will execute a huge number of updates and essentially
+                    * cause an instant game over when we unpause if we stay paused for more than a
+                    * minute or so.
                      */
                     case KeyEvent.VK_P:
                         if (!isGameOver && !isNewGame) {
@@ -206,8 +206,8 @@ public class Tetris extends JFrame {
                         break;
 
                     /*
-				 * Start Game - When pressed, check to see that we're in either a game over or new
-				 * game state. If so, reset the game.
+                    * Start Game - When pressed, check to see that we're in either a game over or new
+                    * game state. If so, reset the game.
                      */
                     case KeyEvent.VK_ENTER:
                         if (isGameOver || isNewGame) {
@@ -263,6 +263,7 @@ public class Tetris extends JFrame {
                             audioGame.unpause();
                             bMusicOn = true;
                         }
+                        break;
                 }
 
             }
@@ -320,7 +321,7 @@ public class Tetris extends JFrame {
         this.random = new Random();
         this.isNewGame = true;
         this.gameSpeed = 1.0f;
-        this.bMusicOn = false;
+        this.bMusicOn = true;
         audioGame = new SoundClip("Classic.wav");
         audioGame.play();
 

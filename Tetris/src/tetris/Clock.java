@@ -33,7 +33,7 @@ public class Clock {
     /**
      * Constructor that creates a new clock and sets it's cycles-per-second.
      *
-     * @param cyclesPerSecond is the number of cycles that elapse per second.
+     * @param fCyclesPerSecond is the number of cycles that elapse per second.
      */
     public Clock(float fCyclesPerSecond) {
         setCyclesPerSecond(fCyclesPerSecond);
@@ -43,7 +43,7 @@ public class Clock {
     /**
      * Sets the number of cycles that elapse per second.
      *
-     * @param cyclesPerSecond is the number of cycles per second.
+     * @param fCyclesPerSecond is the number of cycles per second.
      */
     public void setCyclesPerSecond(float fCyclesPerSecond) {
         this.fMillisPerCycle = (1.0f / fCyclesPerSecond) * 1000;
