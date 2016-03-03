@@ -140,14 +140,14 @@ public class SidePanel extends JPanel {
         g.setFont(LARGE_FONT);
         g.drawString("Controls", SMALL_INSET, offset = CONTROLS_INSET);
         g.setFont(SMALL_FONT);
-        g.drawString("< - Move Left", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("> - Move Right", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("Z - Rotate Anticlockwise", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("X - Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("v - Drop", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("P - Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("S - Save Game", LARGE_INSET, offset += TEXT_STRIDE);
-        g.drawString("L - Load Game", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("<  Move Left", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString(">  Move Right", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("Z  Rotate Anticlockwise", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("X  Rotate Clockwise", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("v  Total Drop", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("P  Pause Game", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("S  Save Game", LARGE_INSET, offset += TEXT_STRIDE);
+        g.drawString("L  Load Game", LARGE_INSET, offset += TEXT_STRIDE);
 
         
         // Draw music theme playing.
@@ -158,7 +158,7 @@ public class SidePanel extends JPanel {
         * Draw the next piece preview box.
          */
         g.setFont(LARGE_FONT);
-        g.drawString("Next Piece:", SMALL_INSET, 70);
+        g.drawString("Next Piece", SMALL_INSET, 70);
         g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 
         /*
