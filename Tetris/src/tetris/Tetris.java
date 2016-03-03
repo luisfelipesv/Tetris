@@ -86,8 +86,14 @@ public class Tetris extends JFrame {
     // Integer with the speed of the game.
     private float gameSpeed;
 
-    // Audioclip with the Game theme selected.
+    // SoundClip with the Game theme selected.
     private SoundClip audioGame;
+    
+    // SoundClip with sound of a horizontal line popped.
+    private SoundClip soundPopped;
+    
+    // SoundClip with sound of a tile at the bottom.
+    private SoundClip soundBottom;
 
     // Creates a new Tetris instance. Sets up the window's properties,
     // and adds a controller listener.
@@ -323,6 +329,10 @@ public class Tetris extends JFrame {
         this.bMusicOn = true;
         audioGame = new SoundClip("Classic.wav");
         audioGame.play();
+        soundPopped = new SoundClip("popped.wav");
+        soundPopped.setLooping(false);
+        soundBottom = new SoundClip("bottom.wav");
+        soundBottom.setLooping(false);
 
         /*
         * Setup the timer to keep the game from running before the user presses enter
@@ -393,6 +403,9 @@ public class Tetris extends JFrame {
             int cleared = board.checkLines();
             if (cleared > 0) {
                 score += 50 << cleared;
+                soundPopped.play();
+            } else {
+                soundBottom.play();
             }
 
             /*
@@ -442,7 +455,7 @@ public class Tetris extends JFrame {
         this.nextType = TileType.values()[random.nextInt(TYPE_COUNT)];
         this.isNewGame = false;
         this.isGameOver = false;
-        this.bMusicOn = false;
+        this.bMusicOn = true;
         board.clear();
         logicTimer.reset();
         logicTimer.setCyclesPerSecond(gameSpeed);
@@ -477,7 +490,7 @@ public class Tetris extends JFrame {
     /**
      * Attempts to set the rotation of the current piece to newRotation.
      *
-     * @param newRotation The rotation of the new peice.
+     * @param newRotation The rotation of the new piece.
      */
     private void rotatePiece(int newRotation) {
         /*
@@ -681,8 +694,8 @@ public class Tetris extends JFrame {
     }
 
     /**
-     * Entry-point of the game. Responsible for creating and starting a new game
-     * instance.
+     * Entry-point of the game. 
+     * Responsible for creating and starting a new game instance.
      *
      * @param args Unused.
      */
