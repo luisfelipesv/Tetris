@@ -299,7 +299,7 @@ public class BoardPanel extends JPanel {
                 - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY / 2);
         
         graGraphic.setFont(fSmallFont);
-        String msg0 = "Press a numbert to switch the song";
+        String msg0 = "Press a number to switch the song";
         graGraphic.drawString(msg0, iCenterX
                 - graGraphic.getFontMetrics().stringWidth(msg0) / 2,320 );
         String msg1 = "5 - Relaxed Game";
