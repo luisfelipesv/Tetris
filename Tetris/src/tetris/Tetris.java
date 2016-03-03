@@ -40,7 +40,7 @@ public class Tetris extends JFrame {
     private SidePanel side;
 
     // Boolean to know whether or not the game is paused.
-    private boolean isPaused;
+    private boolean bPaused;
 
     // Boolean to know whether or not we've played a game yet.
     private boolean isNewGame;
@@ -134,7 +134,7 @@ public class Tetris extends JFrame {
 				 * logic timer to run at a speed of 25 cycles per second.
                      */
                     case KeyEvent.VK_DOWN:
-                        if (!isPaused && dropCooldown == 0) {
+                        if (!bPaused && dropCooldown == 0) {
                             logicTimer.setCyclesPerSecond(25.0f);
                         }
                         break;
@@ -145,7 +145,7 @@ public class Tetris extends JFrame {
 				 * logic timer to run at a speed of 25 cycles per second.
                      */
                     case KeyEvent.VK_SPACE:
-                        if (!isPaused && dropCooldown == 0) {
+                        if (!bPaused && dropCooldown == 0) {
                             logicTimer.setCyclesPerSecond(25.0f);
                         }
                         break;
@@ -156,7 +156,7 @@ public class Tetris extends JFrame {
 				 * position is valid. If so, we decrement the current column by 1.
                      */
                     case KeyEvent.VK_LEFT:
-                        if (!isPaused && board.isValidAndEmpty(currentType, currentCol - 1, currentRow, currentRotation)) {
+                        if (!bPaused && board.isValidAndEmpty(currentType, currentCol - 1, currentRow, currentRotation)) {
                             currentCol--;
                         }
                         break;
@@ -167,7 +167,7 @@ public class Tetris extends JFrame {
 				 * position is valid. If so, we increment the current column by 1.
                      */
                     case KeyEvent.VK_RIGHT:
-                        if (!isPaused && board.isValidAndEmpty(currentType, currentCol + 1, currentRow, currentRotation)) {
+                        if (!bPaused && board.isValidAndEmpty(currentType, currentCol + 1, currentRow, currentRotation)) {
                             currentCol++;
                         }
                         break;
@@ -179,7 +179,7 @@ public class Tetris extends JFrame {
 				 * rotation, the code for rotating the piece is handled in another method.
                      */
                     case KeyEvent.VK_Z:
-                        if (!isPaused) {
+                        if (!bPaused) {
                             rotatePiece((currentRotation == 0) ? 3 : currentRotation - 1);
                         }
                         break;
@@ -192,7 +192,7 @@ public class Tetris extends JFrame {
                      */
                     case KeyEvent.VK_X:
                     case KeyEvent.VK_UP:
-                        if (!isPaused) {
+                        if (!bPaused) {
                             rotatePiece((currentRotation == 3) ? 0 : currentRotation + 1);
                         }
                         break;
@@ -206,8 +206,8 @@ public class Tetris extends JFrame {
                      */
                     case KeyEvent.VK_P:
                         if (!isGameOver && !isNewGame) {
-                            isPaused = !isPaused;
-                            logicTimer.setPaused(isPaused);
+                            bPaused = !bPaused;
+                            logicTimer.setPaused(bPaused);
                         }
                         break;
 
@@ -547,7 +547,7 @@ public class Tetris extends JFrame {
      * @return Whether or not the game is paused.
      */
     public boolean isPaused() {
-        return isPaused;
+        return bPaused;
     }
 
     /**

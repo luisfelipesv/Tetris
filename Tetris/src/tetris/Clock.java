@@ -103,11 +103,11 @@ public class Clock {
      * 
      * Modifier method that pauses or unpauses the clock. 
      *
-     * @param paused is a <code>boolean</code> that defines 
+     * @param bPaused is a <code>boolean</code> that defines 
      * if the clock is paused.
      */
-    public void setPaused(boolean paused) {
-        this.bIsPaused = paused;
+    public void setPaused(boolean bPaused) {
+        this.bIsPaused = bPaused;
     }
 
     /**
