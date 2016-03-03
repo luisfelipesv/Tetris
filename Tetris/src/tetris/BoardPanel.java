@@ -296,7 +296,20 @@ public class BoardPanel extends JPanel {
         graGraphic.setColor(Color.DARK_GRAY);
         String msg = "PAUSED";
         graGraphic.drawString(msg, iCenterX
-                - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY);
+                - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY / 2);
+        
+        graGraphic.setFont(fSmallFont);
+        String msg0 = "Press a numbert to switch the song";
+        graGraphic.drawString(msg0, iCenterX
+                - graGraphic.getFontMetrics().stringWidth(msg0) / 2,320 );
+        String msg1 = "5 - Relaxed Game";
+        int iX = iCenterX - graGraphic.getFontMetrics().stringWidth(msg1) / 2;
+        graGraphic.drawString("1 - Classic Tetris", iX ,350 );
+        graGraphic.drawString("2 - Horror Theme", iX, 370);
+        graGraphic.drawString("3 - Move Fast", iX, 390);
+        graGraphic.drawString("4 - Pop Music", iX, 410);
+        graGraphic.drawString(msg1, iX, 430);
+        
     }
 
     /**
@@ -315,11 +328,23 @@ public class BoardPanel extends JPanel {
          */
         String msg = tetris.isNewGame() ? "TETRIS" : "GAME OVER";
         graGraphic.drawString(msg, iCenterX
-                - graGraphic.getFontMetrics().stringWidth(msg) / 2, 150);
+                - graGraphic.getFontMetrics().stringWidth(msg) / 2, 100);
         graGraphic.setFont(fSmallFont);
         msg = "Press Enter to Play" + (tetris.isNewGame() ? "" : " Again");
         graGraphic.drawString(msg, iCenterX
-                - graGraphic.getFontMetrics().stringWidth(msg) / 2, 300);
+                - graGraphic.getFontMetrics().stringWidth(msg) / 2, iCenterY);
+        
+                graGraphic.setFont(fSmallFont);
+        String msg0 = "Press a numbert to switch the song";
+        graGraphic.drawString(msg0, iCenterX
+                - graGraphic.getFontMetrics().stringWidth(msg0) / 2,320 );
+        String msg1 = "5 - Relaxed Game";
+        int iX = iCenterX - graGraphic.getFontMetrics().stringWidth(msg1) / 2;
+        graGraphic.drawString("1 - Classic Tetris", iX ,350 );
+        graGraphic.drawString("2 - Horror Theme", iX, 370);
+        graGraphic.drawString("3 - Move Fast", iX, 390);
+        graGraphic.drawString("4 - Pop Music", iX, 410);
+        graGraphic.drawString(msg1, iX, 430);
     }
 
     /**
