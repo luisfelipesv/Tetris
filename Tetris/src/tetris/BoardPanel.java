@@ -46,22 +46,22 @@ public class BoardPanel extends JPanel {
     public static final int iRows = iRowsVisible + iRowsHidden;
 
     // The number of pixels that a tile takes up.
-    public static final int iTitleSize = 24;
+    public static final int iTileSize = 24;
 
     // The width of the shading on the TTtiles.
     public static final int iShadeWidth = 4;
 
     // The central x coordinate on the game board.
-    private static final int iCenterX = iColumns * iTitleSize / 2;
+    private static final int iCenterX = iColumns * iTileSize / 2;
 
     // The central y coordinate on the game board.
-    private static final int iCenterY = iRowsVisible * iTitleSize / 2;
+    private static final int iCenterY = iRowsVisible * iTileSize / 2;
 
     // The total width of the panel.
-    public static final int iPanelWidth = iColumns * iTitleSize + iBorderWidth * 2;
+    public static final int iPanelWidth = iColumns * iTileSize + iBorderWidth * 2;
 
     // The total height of the panel.
-    public static final int iPanelHeight = iRowsVisible * iTitleSize + iBorderWidth * 2;
+    public static final int iPanelHeight = iRowsVisible * iTileSize + iBorderWidth * 2;
 
     // The larger font to display.
     private static final Font fLargeFont = new Font("Tahoma", Font.BOLD, 16);
@@ -282,8 +282,8 @@ public class BoardPanel extends JPanel {
 
         // Draw the outline.
         graGraphic.setColor(Color.DARK_GRAY);
-        graGraphic.drawRect(0, 0, iTitleSize * iColumns,
-                iTitleSize * iRowsVisible);
+        graGraphic.drawRect(0, 0, iTileSize * iColumns,
+                iTileSize * iRowsVisible);
     }
 
     /**
@@ -352,8 +352,8 @@ public class BoardPanel extends JPanel {
         graGraphic.setColor(Color.LIGHT_GRAY);
         for (int x = 0; x < iColumns; x++) {
             for (int y = 0; y < iRowsVisible; y++) {
-                graGraphic.drawLine(0, y * iTitleSize, iColumns * iTitleSize, y * iTitleSize);
-                graGraphic.drawLine(x * iTitleSize, 0, x * iTitleSize, iRowsVisible * iTitleSize);
+                graGraphic.drawLine(0, y * iTileSize, iColumns * iTileSize, y * iTileSize);
+                graGraphic.drawLine(x * iTileSize, 0, x * iTileSize, iRowsVisible * iTileSize);
             }
         }
     }
@@ -363,8 +363,8 @@ public class BoardPanel extends JPanel {
             for (int y = iRowsHidden; y < iRows; y++) {
                 TileType tile = getTile(x, y);
                 if (tile != null) {
-                    drawTile(tile, x * iTitleSize, (y - iRowsHidden)
-                            * iTitleSize, graGraphic);
+                    drawTile(tile, x * iTileSize, (y - iRowsHidden)
+                            * iTileSize, graGraphic);
                 }
             }
         }
@@ -381,8 +381,8 @@ public class BoardPanel extends JPanel {
             for (int row = 0; row < type.getDimension(); row++) {
                 if (pieceRow + row >= 2 && type.isTile(col, row,
                         rotation)) {
-                    drawCurrentTile(type, (pieceCol + col) * iTitleSize,
-                            (pieceRow + row - iRowsHidden) * iTitleSize,
+                    drawCurrentTile(type, (pieceCol + col) * iTileSize,
+                            (pieceRow + row - iRowsHidden) * iTileSize,
                             graGraphic);
                 }
             }
@@ -414,8 +414,8 @@ public class BoardPanel extends JPanel {
                 for (int row = 0; row < type.getDimension(); row++) {
                     if (lowest + row >= 2 && type.isTile(col, row, rotation)) {
                         drawTile(base, base.brighter(), base.darker(),
-                                (pieceCol + col) * iTitleSize,
-                                (lowest + row - iRowsHidden) * iTitleSize,
+                                (pieceCol + col) * iTileSize,
+                                (lowest + row - iRowsHidden) * iTileSize,
                                 graGraphic);
                     }
                 }
@@ -462,55 +462,55 @@ public class BoardPanel extends JPanel {
 
         // Fill the entire tile with the base color.
         g.setColor(light);
-        g.fillRect(x, y, iTitleSize, iTitleSize);
-        g.fillRect(x, y, iTitleSize, iTitleSize);
+        g.fillRect(x, y, iTileSize, iTileSize);
+        g.fillRect(x, y, iTileSize, iTileSize);
 
         // Fill the triangles inside the tile
         g.setColor(base);
         if (iAnim == 0) {
-            int xPoints[] = {x, x, x + (iTitleSize / 2)};
-            int yPoints[] = {y + iTitleSize, y, y + (iTitleSize / 2)};
-            int xPoints2[] = {x + (iTitleSize / 2), x + iTitleSize, x + iTitleSize};
-            int yPoints2[] = {y + (iTitleSize / 2), y + iTitleSize, y};
+            int xPoints[] = {x, x, x + (iTileSize / 2)};
+            int yPoints[] = {y + iTileSize, y, y + (iTileSize / 2)};
+            int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
+            int yPoints2[] = {y + (iTileSize / 2), y + iTileSize, y};
             g.fillPolygon(xPoints, yPoints, 3);
             g.fillPolygon(xPoints2, yPoints2, 3);
             g.setColor(dark);
-            int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-            int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2)};
+            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
+            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2)};
             g.fillPolygon(xPoints3, yPoints3, 3);
         } else if (iAnim == 13) {
-            int xPoints[] = {x, x, x + (iTitleSize / 2)};
-            int yPoints[] = {y + iTitleSize, y, y};
-            int xPoints2[] = {x + (iTitleSize / 2), x + iTitleSize, x + iTitleSize};
-            int yPoints2[] = {y, y + iTitleSize, y};
+            int xPoints[] = {x, x, x + (iTileSize / 2)};
+            int yPoints[] = {y + iTileSize, y, y};
+            int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
+            int yPoints2[] = {y, y + iTileSize, y};
             g.fillPolygon(xPoints, yPoints, 3);
             g.fillPolygon(xPoints2, yPoints2, 3);
             g.setColor(dark);
-            int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-            int yPoints3[] = {y + iTitleSize, y + iTitleSize, y};
+            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
+            int yPoints3[] = {y + iTileSize, y + iTileSize, y};
             g.fillPolygon(xPoints3, yPoints3, 3);
         } else if (iAnim < 13) {
-            int xPoints[] = {x, x, x + (iTitleSize / 2), x + iAnim};
-            int yPoints[] = {y, y + iTitleSize, y + (iTitleSize / 2) - iAnim, y};
-            int xPoints2[] = {x + iTitleSize, x + iTitleSize, x + (iTitleSize / 2), x + iTitleSize - iAnim};
-            int yPoints2[] = {y, y + iTitleSize, y + (iTitleSize / 2) - iAnim, y};
+            int xPoints[] = {x, x, x + (iTileSize / 2), x + iAnim};
+            int yPoints[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnim, y};
+            int xPoints2[] = {x + iTileSize, x + iTileSize, x + (iTileSize / 2), x + iTileSize - iAnim};
+            int yPoints2[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnim, y};
             g.fillPolygon(xPoints, yPoints, 4);
             g.fillPolygon(xPoints2, yPoints2, 4);
             g.setColor(dark);
-            int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-            int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2) - iAnim};
+            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
+            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2) - iAnim};
             g.fillPolygon(xPoints3, yPoints3, 3);
         } else {
             int iAnm = 26 - iAnim; // Variable para Animación
-            int xPoints[] = {x, x, x + (iTitleSize / 2), x + iAnm};
-            int yPoints[] = {y, y + iTitleSize, y + (iTitleSize / 2) - iAnm, y};
-            int xPoints2[] = {x + iTitleSize, x + iTitleSize, x + (iTitleSize / 2), x + iTitleSize - iAnm};
-            int yPoints2[] = {y, y + iTitleSize, y + (iTitleSize / 2) - iAnm, y};
+            int xPoints[] = {x, x, x + (iTileSize / 2), x + iAnm};
+            int yPoints[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnm, y};
+            int xPoints2[] = {x + iTileSize, x + iTileSize, x + (iTileSize / 2), x + iTileSize - iAnm};
+            int yPoints2[] = {y, y + iTileSize, y + (iTileSize / 2) - iAnm, y};
             g.fillPolygon(xPoints, yPoints, 4);
             g.fillPolygon(xPoints2, yPoints2, 4);
             g.setColor(dark);
-            int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-            int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2) - iAnm};
+            int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
+            int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2) - iAnm};
             g.fillPolygon(xPoints3, yPoints3, 3);
         }
 
@@ -530,21 +530,21 @@ public class BoardPanel extends JPanel {
 
         // Fill the entire tile with the base color.
         g.setColor(light);
-        g.fillRect(x, y, iTitleSize, iTitleSize);
-        g.fillRect(x, y, iTitleSize, iTitleSize);
+        g.fillRect(x, y, iTileSize, iTileSize);
+        g.fillRect(x, y, iTileSize, iTileSize);
 
         // Fill the triangles inside the tile
         g.setColor(base);
 
-        int xPoints[] = {x, x, x + (iTitleSize / 2)};
-        int yPoints[] = {y + iTitleSize, y, y + (iTitleSize / 2)};
-        int xPoints2[] = {x + (iTitleSize / 2), x + iTitleSize, x + iTitleSize};
-        int yPoints2[] = {y + (iTitleSize / 2), y + iTitleSize, y};
+        int xPoints[] = {x, x, x + (iTileSize / 2)};
+        int yPoints[] = {y + iTileSize, y, y + (iTileSize / 2)};
+        int xPoints2[] = {x + (iTileSize / 2), x + iTileSize, x + iTileSize};
+        int yPoints2[] = {y + (iTileSize / 2), y + iTileSize, y};
         g.fillPolygon(xPoints, yPoints, 3);
         g.fillPolygon(xPoints2, yPoints2, 3);
         g.setColor(dark);
-        int xPoints3[] = {x, x + iTitleSize, x + (iTitleSize / 2)};
-        int yPoints3[] = {y + iTitleSize, y + iTitleSize, y + (iTitleSize / 2)};
+        int xPoints3[] = {x, x + iTileSize, x + (iTileSize / 2)};
+        int yPoints3[] = {y + iTileSize, y + iTileSize, y + (iTileSize / 2)};
         g.fillPolygon(xPoints3, yPoints3, 3);
 
     }
