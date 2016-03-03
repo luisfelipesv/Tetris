@@ -2,6 +2,7 @@ package tetris;
 
 /**
  * Class Clock
+ * 
  * @authors Brendan Jones, arrangements by: luisfelipesv y melytc
  *
  * Luis Felipe Salazar A00817158 Melissa Janet Treviño A00816715
@@ -31,6 +32,8 @@ public class Clock {
     private boolean bIsPaused;
 
     /**
+     * Clock
+     * 
      * Constructor that creates a new clock and sets it's cycles-per-second.
      *
      * @param fCyclesPerSecond is the number of cycles that elapse per second.
@@ -41,6 +44,8 @@ public class Clock {
     }
 
     /**
+     * setCyclesPerSecond
+     * 
      * Sets the number of cycles that elapse per second.
      *
      * @param fCyclesPerSecond is the number of cycles per second.
@@ -50,6 +55,8 @@ public class Clock {
     }
 
     /**
+     * reset
+     * 
      * Method that resets the clock stats. 
      * Elapsed cycles and cycle excess will be reset
      * to 0, the last update time will be reset to the current time, and the
@@ -68,6 +75,8 @@ public class Clock {
     }
 
     /**
+     * update
+     * 
      * Method that updates the clock stats. 
      * The number of elapsed cycles, as well as the
      * cycle excess will be calculated only if the clock is not paused. This
@@ -90,6 +99,8 @@ public class Clock {
     }
 
     /**
+     * setPaused
+     * 
      * Modifier method that pauses or unpauses the clock. 
      *
      * @param paused is a <code>boolean</code> that defines 
@@ -100,6 +111,8 @@ public class Clock {
     }
 
     /**
+     * bIsPaused
+     * 
      * Modifier method that checks to see if the clock is currently paused.
      *
      * @return A <code>boolean</code> value to know if the clock is paused.
@@ -109,6 +122,8 @@ public class Clock {
     }
 
     /**
+     * hasElapsedCycle
+     * 
      * Method that checks to see if a cycle has elapsed for this clock yet. 
      * If so, the number of elapsed cycles will be decremented by one.
      *
@@ -125,6 +140,8 @@ public class Clock {
     }
 
     /**
+     * peekElapsedCycle
+     * 
      * Method that checks to see if a cycle has elapsed for this clock yet. 
      * Unlike {@code hasElapsedCycle}, 
      * the number of cycles will not be decremented if
@@ -139,6 +156,8 @@ public class Clock {
     }
 
     /**
+     * getCurrentTime
+     * 
      * Method that calculates the current time in milliseconds 
      * using the computer's high resolution clock. 
      * This is much more reliable than

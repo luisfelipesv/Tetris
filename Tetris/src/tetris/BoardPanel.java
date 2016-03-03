@@ -58,10 +58,12 @@ public class BoardPanel extends JPanel {
     private static final int iCenterY = iRowsVisible * iTileSize / 2;
 
     // The total width of the panel.
-    public static final int iPanelWidth = iColumns * iTileSize + iBorderWidth * 2;
+    public static final int iPanelWidth = iColumns * iTileSize 
+            + iBorderWidth * 2;
 
     // The total height of the panel.
-    public static final int iPanelHeight = iRowsVisible * iTileSize + iBorderWidth * 2;
+    public static final int iPanelHeight = iRowsVisible * iTileSize 
+            + iBorderWidth * 2;
 
     // The larger font to display.
     private static final Font fLargeFont = new Font("Tahoma", Font.BOLD, 16);
@@ -507,7 +509,8 @@ public class BoardPanel extends JPanel {
      * @param iY is the <code>integer</code> with the row.
      * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    private void drawTile(TileType TTtype, int iX, int iY, Graphics graGraphic) {
+    private void drawTile(TileType TTtype, int iX, int iY, 
+            Graphics graGraphic) {
         drawTile(TTtype.getBaseColor(), TTtype.getLightColor(), 
                 TTtype.getDarkColor(), iX, iY, graGraphic);
     }
@@ -623,7 +626,8 @@ public class BoardPanel extends JPanel {
      * @param cDark is the <code>dark color</code> of the tile.
      * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    public void drawTile13minus(int iX, int iY, Color cDark, Graphics graGraphic){
+    public void drawTile13minus(int iX, int iY, Color cDark, 
+            Graphics graGraphic){
     int xPoints[] = {iX, iX, iX + (iTileSize / 2), iX + iAnim};
             int yPoints[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnim, iY};
             int xPoints2[] = {iX + iTileSize, iX + iTileSize, iX + (iTileSize / 2), iX + iTileSize - iAnim};
@@ -646,7 +650,8 @@ public class BoardPanel extends JPanel {
      * @param cDark is the <code>dark color</code> of the tile.
      * @param graGraphic is the <code>Graphic</code> of the game.
      */
-    public void drawTile13plus(int iX, int iY, Color cDark, Graphics graGraphic) {
+    public void drawTile13plus(int iX, int iY, Color cDark, 
+            Graphics graGraphic) {
         int iAnm = 26 - iAnim; // Variable para Animación
             int xPoints[] = {iX, iX, iX + (iTileSize / 2), iX + iAnm};
             int yPoints[] = {iY, iY + iTileSize, iY + (iTileSize / 2) - iAnm, iY};
