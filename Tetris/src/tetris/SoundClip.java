@@ -28,7 +28,7 @@ public class SoundClip {
     private Clip cClip;
     
     // Boolean to work with loops in the audio.
-    private boolean bLooping = false;
+    private boolean bLooping = true;
     
     // Intefer with the number of repeats done of the audio.
     private int iRepeat = 0;
