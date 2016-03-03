@@ -12,8 +12,8 @@ public enum TileType {
 	/**
 	 * Piece TypeI.
 	 */
-	TypeI(new Color(BoardPanel.iColorMin, BoardPanel.iColorMax, 
-                BoardPanel.iColorMax), 4, 4, 1, new boolean[][] {
+	TypeI(new Color(18, 220, 
+                220), 4, 4, 1, new boolean[][] {
 		{
 			false,	false,	false,	false,
 			true,	true,	true,	true,
@@ -43,8 +43,7 @@ public enum TileType {
 	/**
 	 * Piece TypeJ.
 	 */
-	TypeJ(new Color(BoardPanel.iColorMin, BoardPanel.iColorMin, 
-                BoardPanel.iColorMax), 3, 3, 2, new boolean[][] {
+	TypeJ(new Color(74, 144, 226), 3, 3, 2, new boolean[][] {
 		{
 			true,	false,	false,
 			true,	true,	true,
@@ -70,8 +69,7 @@ public enum TileType {
 	/**
 	 * Piece TypeL.
 	 */
-	TypeL(new Color(BoardPanel.iColorMax, 127, BoardPanel.iColorMin),
-                3, 3, 2, new boolean[][] {
+	TypeL(new Color(255, 153, 0), 3, 3, 2, new boolean[][] {
 		{
 			false,	false,	true,
 			true,	true,	true,
@@ -97,8 +95,8 @@ public enum TileType {
 	/**
 	 * Piece TypeO.
 	 */
-	TypeO(new Color(BoardPanel.iColorMax, BoardPanel.iColorMax, 
-                BoardPanel.iColorMin), 2, 2, 2, new boolean[][] {
+	TypeO(new Color(255, 243, 
+                88), 2, 2, 2, new boolean[][] {
 		{
 			true,	true,
 			true,	true,
@@ -120,8 +118,7 @@ public enum TileType {
 	/**
 	 * Piece TypeS.
 	 */
-	TypeS(new Color(BoardPanel.iColorMin, BoardPanel.iColorMax, 
-                BoardPanel.iColorMin), 3, 3, 2, new boolean[][] {
+	TypeS(new Color(126, 211, 33), 3, 3, 2, new boolean[][] {
 		{
 			false,	true,	true,
 			true,	true,	false,
@@ -147,7 +144,7 @@ public enum TileType {
 	/**
 	 * Piece TypeT.
 	 */
-	TypeT(new Color(128, BoardPanel.iColorMin, 128), 3, 3, 2, new boolean[][] {
+	TypeT(new Color(131, 126, 205), 3, 3, 2, new boolean[][] {
 		{
 			false,	true,	false,
 			true,	true,	true,
@@ -173,8 +170,7 @@ public enum TileType {
 	/**
 	 * Piece TypeZ.
 	 */
-	TypeZ(new Color(BoardPanel.iColorMax, BoardPanel.iColorMin, 
-                BoardPanel.iColorMin), 3, 3, 2, new boolean[][] {
+	TypeZ(new Color(213, 70, 86), 3, 3, 2, new boolean[][] {
 		{
 			true,	true,	false,
 			false,	true,	true,
