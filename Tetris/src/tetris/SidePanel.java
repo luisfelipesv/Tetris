@@ -130,11 +130,11 @@ public class SidePanel extends JPanel {
                 iOffset += iTextStride);
         graGraphic.drawString("→  Move Right", iLargeInset, 
                 iOffset += iTextStride);
-        graGraphic.drawString("Z  Rotate Anticlockwise", iLargeInset, 
+        graGraphic.drawString("↑  Rotate Clockwise", iLargeInset, 
                 iOffset += iTextStride);
         graGraphic.drawString("X  Rotate Clockwise", iLargeInset, 
                 iOffset += iTextStride);
-        graGraphic.drawString("↑  Rotate Clockwise", iLargeInset, 
+        graGraphic.drawString("Z  Rotate Anticlockwise", iLargeInset, 
                 iOffset += iTextStride);
         graGraphic.drawString("—  Total Drop (Space Bar)", iLargeInset, 
                 iOffset += iTextStride);
