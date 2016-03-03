@@ -315,9 +315,8 @@ public class Tetris extends JFrame {
      * Starts the game running. Initializes everything and enters the game loop.
      */
     private void startGame() {
-        // Initialize our random number generator, logic timer, and new game variables.
-        // This is set to true
-        // initially and then set to false when the game starts.
+        // Initialize our random number generator, logic timer, 
+        // music, and new game variables.
         this.random = new Random();
         this.isNewGame = true;
         this.gameSpeed = 1.0f;
@@ -326,8 +325,8 @@ public class Tetris extends JFrame {
         audioGame.play();
 
         /*
-		 * Setup the timer to keep the game from running before the user presses enter
-		 * to start it.
+        * Setup the timer to keep the game from running before the user presses enter
+        * to start it.
          */
         this.logicTimer = new Clock(gameSpeed);
         logicTimer.setPaused(true);
@@ -572,6 +571,13 @@ public class Tetris extends JFrame {
      */
     public int getLevel() {
         return level;
+    }
+    
+    public String getMusic() {
+        String sTheme = this.audioGame.getFilename();
+        int iLength = sTheme.length();
+        sTheme = (String) sTheme.subSequence(0, iLength-4);
+        return sTheme;
     }
 
     /**

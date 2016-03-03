@@ -119,14 +119,14 @@ public class SidePanel extends JPanel {
         g.setColor(DRAW_COLOR);
 
         /*
-		 * This variable stores the current y coordinate of the string.
-		 * This way we can re-order, add, or remove new strings if necessary
-		 * without needing to change the other strings.
+        * This variable stores the current y coordinate of the string.
+        * This way we can re-order, add, or remove new strings if necessary
+        * without needing to change the other strings.
          */
         int offset;
 
         /*
-		 * Draw the "Stats" category.
+        * Draw the "Stats" category.
          */
         g.setFont(LARGE_FONT);
         g.drawString("Stats", SMALL_INSET, offset = STATS_INSET);
@@ -135,7 +135,7 @@ public class SidePanel extends JPanel {
         g.drawString("Score: " + tetris.getScore(), LARGE_INSET, offset += TEXT_STRIDE);
 
         /*
-		 * Draw the "Controls" category.
+        * Draw the "Controls" category.
          */
         g.setFont(LARGE_FONT);
         g.drawString("Controls", SMALL_INSET, offset = CONTROLS_INSET);
@@ -149,42 +149,47 @@ public class SidePanel extends JPanel {
         g.drawString("S - Save Game", LARGE_INSET, offset += TEXT_STRIDE);
         g.drawString("L - Load Game", LARGE_INSET, offset += TEXT_STRIDE);
 
+        
+        // Draw music theme playing.
+        g.setFont(SMALL_FONT);
+        g.drawString("Music: " + tetris.getMusic(), LARGE_INSET * 2, 15);
+        
         /*
-		 * Draw the next piece preview box.
+        * Draw the next piece preview box.
          */
         g.setFont(LARGE_FONT);
         g.drawString("Next Piece:", SMALL_INSET, 70);
         g.drawRect(SQUARE_CENTER_X - SQUARE_SIZE, SQUARE_CENTER_Y - SQUARE_SIZE, SQUARE_SIZE * 2, SQUARE_SIZE * 2);
 
         /*
-		 * Draw a preview of the next piece that will be spawned. The code is pretty much
-		 * identical to the drawing code on the board, just smaller and centered, rather
-		 * than constrained to a grid.
+        * Draw a preview of the next piece that will be spawned. The code is pretty much
+        * identical to the drawing code on the board, just smaller and centered, rather
+        * than constrained to a grid.
          */
         TileType type = tetris.getNextPieceType();
         if (!tetris.isGameOver() && type != null) {
             /*
-			 * Get the size properties of the current piece.
+            * Get the size properties of the current piece.
              */
             int cols = type.getCols();
             int rows = type.getRows();
             int dimension = type.getDimension();
 
             /*
-			 * Calculate the top left corner (origin) of the piece.
+            * Calculate the top left corner (origin) of the piece.
              */
             int startX = (SQUARE_CENTER_X - (cols * TILE_SIZE / 2));
             int startY = (SQUARE_CENTER_Y - (rows * TILE_SIZE / 2));
 
             /*
-			 * Get the insets for the preview. The default
-			 * rotation is used for the preview, so we just use 0.
+            * Get the insets for the preview. The default
+            * rotation is used for the preview, so we just use 0.
              */
             int top = type.getTopInset(0);
             int left = type.getLeftInset(0);
 
             /*
-			 * Loop through the piece and draw it's tiles onto the preview.
+            * Loop through the piece and draw it's tiles onto the preview.
              */
             for (int row = 0; row < dimension; row++) {
                 for (int col = 0; col < dimension; col++) {
