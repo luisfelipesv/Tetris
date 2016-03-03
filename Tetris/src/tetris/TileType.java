@@ -3,7 +3,16 @@ package tetris;
 import java.awt.Color;
 
 /**
- * The {@code PieceType} enum describes the properties of the various pieces that can be used in the game.
+ * TileType Class
+ *
+ * @authors Brendan Jones, arrangements by: luisfelipesv y melytc
+ *
+ * Luis Felipe Salazar A00817158 Melissa Janet Treviño A00816715
+ *
+ * 1/MAR/16
+ * @version 2.0
+ *
+ * The {@code PieceType} describes the properties of the various pieces that can be used in the game.
  * @author Brendan Jones
  *
  */
