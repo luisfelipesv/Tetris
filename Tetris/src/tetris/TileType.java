@@ -98,7 +98,7 @@ public enum TileType {
 	 * Piece TypeO.
 	 */
 	TypeO(new Color(BoardPanel.iColorMax, BoardPanel.iColorMax, 
-                BoardPanel.iColorMax), 2, 2, 2, new boolean[][] {
+                BoardPanel.iColorMin), 2, 2, 2, new boolean[][] {
 		{
 			true,	true,
 			true,	true,
